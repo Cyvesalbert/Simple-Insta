@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.simpleinsta.R;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnSubmit;
     private File photoFile;
     public String photoFileName = "photo.jpg";
+    ProgressBar pb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +72,10 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "There is no image", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 ParseUser currentUser = ParseUser.getCurrentUser();
                 savePost(description, currentUser, photoFile);
+
             }
         });
     }
@@ -129,6 +133,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void savePost(String description, ParseUser currentUser, File photoFile) {
+        // on some click or some loading we need to wait for...
+        pb = (ProgressBar) findViewById(R.id.pbLoading);
+        pb.setVisibility(ProgressBar.VISIBLE);
+
         Post post = new Post();
         post.setDescription(description);
         post.setImage(new ParseFile(photoFile));
@@ -139,10 +147,15 @@ public class MainActivity extends AppCompatActivity {
                 if(e != null){
                     Log.e(TAG, "Error while saving", e);
                     Toast.makeText(MainActivity.this, "Error while saving", Toast.LENGTH_SHORT).show();
+                    // run a background job and once complete
+                    pb.setVisibility(ProgressBar.INVISIBLE);
                 }
                 Log.i(TAG, "Post saved successfully");
+                Toast.makeText(MainActivity.this, "Post saved successfully", Toast.LENGTH_SHORT).show();
                 etDescription.setText("");
                 ivPostImage.setImageResource(0);
+                // run a background job and once complete
+                pb.setVisibility(ProgressBar.INVISIBLE);
             }
         });
     }

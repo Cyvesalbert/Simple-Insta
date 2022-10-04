@@ -1,8 +1,8 @@
 package com.example.simpleinsta.ui.login;
 
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
-import android.support.annotation.NonNull;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.annotation.NonNull;
 
 import com.example.simpleinsta.data.LoginDataSource;
 import com.example.simpleinsta.data.LoginRepository;

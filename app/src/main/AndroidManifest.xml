@@ -16,6 +16,7 @@
         android:roundIcon="@drawable/insta_icon_rbg"
         android:supportsRtl="true"
         android:theme="@style/Theme.SimpleInsta"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
         <provider

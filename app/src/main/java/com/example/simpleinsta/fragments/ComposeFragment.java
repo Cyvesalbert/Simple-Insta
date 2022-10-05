@@ -70,6 +70,7 @@ public class ComposeFragment extends Fragment {
         btncaptureImage = view.findViewById(R.id.btnCaptureImage);
         ivPostImage = view.findViewById(R.id.ivPostImage);
         btnSubmit = view.findViewById(R.id.btnSubmit);
+        pb = (ProgressBar) view.findViewById(R.id.pbLoading);
 
         btncaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,7 +154,6 @@ public class ComposeFragment extends Fragment {
 
     private void savePost(String description, ParseUser currentUser, File photoFile) {
         // on some click or some loading we need to wait for...
-        pb = (ProgressBar) pb.findViewById(R.id.pbLoading);
         pb.setVisibility(ProgressBar.VISIBLE);
 
         Post post = new Post();
